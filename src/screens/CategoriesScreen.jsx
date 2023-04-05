@@ -6,7 +6,7 @@ import { CATEGORIES } from 'data/mock-data';
 function CategoriesScreen() {
   const renderItem = ({ item }) => <CategoryGridTile color={item.color} title={item.title} />;
 
-  return <FlatList data={CATEGORIES} renderItem={renderItem} keyExtractor={(item) => item.id} />;
+  return <FlatList data={CATEGORIES} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={2} />;
 }
 
 export default CategoriesScreen;

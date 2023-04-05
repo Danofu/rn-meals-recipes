@@ -31,7 +31,7 @@ CategoryGridTile.propTypes = {
 CategoryGridTile.defaultProps = {
   title: '',
   color: '',
-  onPress: () => {}
+  onPress: () => {},
 };
 
 export default CategoryGridTile;

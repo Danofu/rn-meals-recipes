@@ -5,9 +5,11 @@ import CategoryGridTile from 'components/CategoryGridTile';
 import { CATEGORIES } from 'data/mock-data';
 
 function CategoriesScreen({ navigation }) {
-  const pressHandler = () => navigation.navigate('MealsOverview');
+  const renderItem = ({ item }) => {
+    const pressHandler = () => navigation.navigate('MealsOverview', { categoryId: item.id });
 
-  const renderItem = ({ item }) => <CategoryGridTile color={item.color} title={item.title} onPress={pressHandler} />;
+    return <CategoryGridTile color={item.color} title={item.title} onPress={pressHandler} />;
+  };
 
   return <FlatList data={CATEGORIES} renderItem={renderItem} keyExtractor={(item) => item.id} numColumns={2} />;
 }

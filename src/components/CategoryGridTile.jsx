@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import tinycolor from 'tinycolor2';
 import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 
-function CategoryGridTile({ title, color }) {
+function CategoryGridTile({ title, color, onPress }) {
   return (
     <View style={styles.gridItem}>
       <Pressable
@@ -12,6 +12,7 @@ function CategoryGridTile({ title, color }) {
           { backgroundColor: color },
           pressed && Platform.OS === 'ios' && styles.buttonPressed,
         ]}
+        onPress={onPress}
       >
         <View style={styles.innerContainer}>
           <Text style={styles.title}>{title}</Text>
@@ -24,11 +25,13 @@ function CategoryGridTile({ title, color }) {
 CategoryGridTile.propTypes = {
   title: PropTypes.string,
   color: PropTypes.string,
+  onPress: PropTypes.func,
 };
 
 CategoryGridTile.defaultProps = {
   title: '',
   color: '',
+  onPress: () => {}
 };
 
 export default CategoryGridTile;

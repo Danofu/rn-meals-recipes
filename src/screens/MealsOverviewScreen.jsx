@@ -1,14 +1,19 @@
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 
+import MealItem from 'components/MealItem';
 import { MEALS } from 'data/mock-data';
 
 function MealsOverviewScreen({ route }) {
   const { categoryId } = route.params;
 
+  const displayedMeals = MEALS.filter((meal) => meal.categoryIds.includes(categoryId));
+
+  const renderItem = ({ item }) => <MealItem title={item.title} />;
+
   return (
     <View style={styles.container}>
-      <Text>Meals Overview Screen - {categoryId}</Text>
+      <FlatList data={displayedMeals} renderItem={renderItem} keyExtractor={(item) => item.id} />
     </View>
   );
 }

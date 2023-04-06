@@ -1,12 +1,18 @@
 import PropTypes from 'prop-types';
 import { Image, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-function MealItem({ title, imageUrl, duration, complexity, affordability }) {
+function MealItem({ id, title, imageUrl, duration, complexity, affordability }) {
+  const { navigate } = useNavigation();
+
+  const selectMealItemHandler = () => navigate('MealDetail', { mealId: id });
+
   return (
     <View style={styles.mealItem}>
       <Pressable
         android_ripple={{ color: '#CCC' }}
         style={({ pressed }) => [styles.button, pressed && Platform.OS === 'ios' && styles.buttonPressed]}
+        onPress={selectMealItemHandler}
       >
         <View>
           <Image source={{ uri: imageUrl }} style={styles.image} />
@@ -23,6 +29,7 @@ function MealItem({ title, imageUrl, duration, complexity, affordability }) {
 }
 
 MealItem.propTypes = {
+  id: PropTypes.string,
   title: PropTypes.string,
   imageUrl: PropTypes.string,
   duration: PropTypes.number,
@@ -31,9 +38,10 @@ MealItem.propTypes = {
 };
 
 MealItem.defaultProps = {
+  id: '',
   title: '',
   imageUrl: '',
-  duration: 0,
+  duration: NaN,
   complexity: '',
   affordability: '',
 };

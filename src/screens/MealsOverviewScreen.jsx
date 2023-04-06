@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { useLayoutEffect } from 'react';
 
 import MealItem from 'components/MealItem';
 import { CATEGORIES, MEALS } from 'data/mock-data';
+import { screenDefaultProps, screenPropTypes } from 'utils/prop-types';
 
 function MealsOverviewScreen({ route, navigation }) {
   const { categoryId } = route.params;
@@ -11,8 +11,8 @@ function MealsOverviewScreen({ route, navigation }) {
   const displayedMeals = MEALS.filter((meal) => meal.categoryIds.includes(categoryId));
 
   const renderItem = ({ item }) => {
-    const { title, imageUrl, complexity, duration, affordability } = item;
-    const mealItemProps = { title, imageUrl, complexity, duration, affordability };
+    const { id, title, imageUrl, complexity, duration, affordability } = item;
+    const mealItemProps = { id, title, imageUrl, complexity, duration, affordability };
     return <MealItem {...mealItemProps} />;
   };
 
@@ -28,16 +28,9 @@ function MealsOverviewScreen({ route, navigation }) {
   );
 }
 
-MealsOverviewScreen.propTypes = {
-  route: PropTypes.shape({
-    params: PropTypes.shape({
-      categoryId: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-  navigation: PropTypes.shape({ setOptions: PropTypes.func.isRequired }).isRequired,
-};
+MealsOverviewScreen.propTypes = { ...screenPropTypes };
 
-MealsOverviewScreen.defaultProps = {};
+MealsOverviewScreen.defaultProps = { ...screenDefaultProps };
 
 export default MealsOverviewScreen;
 

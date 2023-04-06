@@ -15,6 +15,7 @@ function MealDetailScreen({ route, navigation }) {
     (meal) => meal.id === mealId
   );
 
+  // eslint-disable-next-line no-console
   const headerButtonPressHandler = () => console.log('[ MealDetailScreen ]: pressed !');
 
   useLayoutEffect(() => {

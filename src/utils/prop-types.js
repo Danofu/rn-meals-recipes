@@ -6,8 +6,12 @@ export const screenPropTypes = {
     setOptions: PropTypes.func.isRequired,
   }).isRequired,
   route: PropTypes.shape({
-    params: PropTypes.object.isRequired,
+    params: PropTypes.object,
   }).isRequired,
 };
 
 export const screenDefaultProps = {};
+
+export const childrenPropTypes = { children: PropTypes.node };
+
+export const childrenDefaultProps = { children: undefined };

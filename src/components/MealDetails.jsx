@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-function MealDetails({ duration, complexity, affordability }) {
+function MealDetails({ duration, complexity, affordability, style, textStyle }) {
   return (
-    <View style={styles.details}>
-      <Text style={styles.detailItem}>{duration}m</Text>
-      <Text style={styles.detailItem}>{complexity.toUpperCase()}</Text>
-      <Text style={styles.detailItem}>{affordability.toUpperCase()}</Text>
+    <View style={[styles.details, style]}>
+      <Text style={[styles.detailItem, textStyle]}>{duration}m</Text>
+      <Text style={[styles.detailItem, textStyle]}>{complexity.toUpperCase()}</Text>
+      <Text style={[styles.detailItem, textStyle]}>{affordability.toUpperCase()}</Text>
     </View>
   );
 }
@@ -15,12 +15,16 @@ MealDetails.propTypes = {
   duration: PropTypes.number,
   complexity: PropTypes.string,
   affordability: PropTypes.string,
+  style: PropTypes.object,
+  textStyle: PropTypes.object,
 };
 
 MealDetails.defaultProps = {
   duration: NaN,
   complexity: '',
   affordability: '',
+  style: {},
+  textStyle: {},
 };
 
 export default MealDetails;

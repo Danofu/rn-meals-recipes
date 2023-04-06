@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import { FlatList, StyleSheet, View } from 'react-native';
+import { useLayoutEffect } from 'react';
 
 import MealItem from 'components/MealItem';
-import { MEALS } from 'data/mock-data';
+import { CATEGORIES, MEALS } from 'data/mock-data';
 
-function MealsOverviewScreen({ route }) {
+function MealsOverviewScreen({ route, navigation }) {
   const { categoryId } = route.params;
 
   const displayedMeals = MEALS.filter((meal) => meal.categoryIds.includes(categoryId));
@@ -14,6 +15,11 @@ function MealsOverviewScreen({ route }) {
     const mealItemProps = { title, imageUrl, complexity, duration, affordability };
     return <MealItem {...mealItemProps} />;
   };
+
+  useLayoutEffect(() => {
+    const categoryTitle = CATEGORIES.find((category) => category.id === categoryId).title;
+    navigation.setOptions({ title: categoryTitle });
+  }, [categoryId, navigation]);
 
   return (
     <View style={styles.container}>
@@ -28,6 +34,7 @@ MealsOverviewScreen.propTypes = {
       categoryId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  navigation: PropTypes.shape({ setOptions: PropTypes.func.isRequired }).isRequired,
 };
 
 MealsOverviewScreen.defaultProps = {};

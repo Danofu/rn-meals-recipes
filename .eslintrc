@@ -22,6 +22,7 @@
         "global-require": "off",
         "no-use-before-define": ["error", { "variables": false }],
         "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
+        "react/jsx-props-no-spreading": ["error", { "custom": "ignore" }],
         "react/style-prop-object": ["error", { "allow": ["StatusBar"] }]
     },
     "settings": {

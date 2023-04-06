@@ -9,7 +9,11 @@ function MealsOverviewScreen({ route }) {
 
   const displayedMeals = MEALS.filter((meal) => meal.categoryIds.includes(categoryId));
 
-  const renderItem = ({ item }) => <MealItem title={item.title} />;
+  const renderItem = ({ item }) => {
+    const { title, imageUrl, complexity, duration, affordability } = item;
+    const mealItemProps = { title, imageUrl, complexity, duration, affordability };
+    return <MealItem {...mealItemProps} />;
+  };
 
   return (
     <View style={styles.container}>

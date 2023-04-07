@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useMemo, useState } from 'react';
 
 import { childrenDefaultProps, childrenPropTypes } from 'utils/prop-types';
 
@@ -9,9 +9,20 @@ export const FavouritesContext = createContext({
 });
 
 function FavouritesProvider({ children }) {
+  const [favouriteMealIds, setFavouriteMealIds] = useState([]);
 
+  const addFavourite = (id) => setFavouriteMealIds((prevFavouriteMealIds) => [...prevFavouriteMealIds, id]);
 
-  return <FavouritesContext.Provider value={{}}>{children}</FavouritesContext.Provider>;
+  const removeFavourite = (id) =>
+    setFavouriteMealIds((prevFavouriteMealIds) => prevFavouriteMealIds.filter((mealId) => mealId !== id));
+
+  const value = useMemo(() => ({ ids: favouriteMealIds, addFavourite, removeFavourite }), [favouriteMealIds]);
+
+  return (
+    <FavouritesContext.Provider value={value}>
+      {children}
+    </FavouritesContext.Provider>
+  );
 }
 
 FavouritesProvider.propTypes = { ...childrenPropTypes };

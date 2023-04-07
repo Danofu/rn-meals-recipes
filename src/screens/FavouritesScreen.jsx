@@ -1,14 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 
 import MealList from 'components/MealList/List';
-import { FavouritesContext } from 'store/context/FavouritesProvider';
 import { MEALS } from 'data/mock-data';
 
 function FavouritesScreen() {
-  const { ids: favouriteIds } = useContext(FavouritesContext);
+  const favouriteMealIds = useSelector((state) => state.favouriteMeals.ids);
 
-  if (favouriteIds.length === 0) {
+  if (favouriteMealIds.length === 0) {
     return (
       <View style={styles.rootContainer}>
         <Text style={styles.text}>You have no favourite meals yet</Text>
@@ -16,7 +15,7 @@ function FavouritesScreen() {
     );
   }
 
-  const favouriteMeals = MEALS.filter((meal) => favouriteIds.includes(meal.id));
+  const favouriteMeals = MEALS.filter((meal) => favouriteMealIds.includes(meal.id));
 
   return <MealList items={favouriteMeals} />;
 }

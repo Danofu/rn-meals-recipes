@@ -18,11 +18,7 @@ function FavouritesProvider({ children }) {
 
   const value = useMemo(() => ({ ids: favouriteMealIds, addFavourite, removeFavourite }), [favouriteMealIds]);
 
-  return (
-    <FavouritesContext.Provider value={value}>
-      {children}
-    </FavouritesContext.Provider>
-  );
+  return <FavouritesContext.Provider value={value}>{children}</FavouritesContext.Provider>;
 }
 
 FavouritesProvider.propTypes = { ...childrenPropTypes };

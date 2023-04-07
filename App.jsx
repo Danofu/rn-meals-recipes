@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 
 import CategoriesScreen from 'screens/CategoriesScreen';
+import FavouritesProvider from 'store/context/FavouritesProvider';
 import FavouritesScreen from 'screens/FavouritesScreen';
 import MealDetailScreen from 'screens/MealDetailScreen';
 import MealsOverviewScreen from 'screens/MealsOverviewScreen';
@@ -50,19 +51,21 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: { backgroundColor: '#351401' },
-            headerTintColor: 'white',
-            contentStyle: { backgroundColor: '#3F2F25' },
-          }}
-        >
-          <Stack.Screen name="Drawer" component={DrawerNavigator} options={{ headerShown: false }} />
-          <Stack.Screen name="MealsOverview" component={MealsOverviewScreen} />
-          <Stack.Screen name="MealDetail" component={MealDetailScreen} options={{ title: 'About the Meal' }} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <FavouritesProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: { backgroundColor: '#351401' },
+              headerTintColor: 'white',
+              contentStyle: { backgroundColor: '#3F2F25' },
+            }}
+          >
+            <Stack.Screen name="Drawer" component={DrawerNavigator} options={{ headerShown: false }} />
+            <Stack.Screen name="MealsOverview" component={MealsOverviewScreen} />
+            <Stack.Screen name="MealDetail" component={MealDetailScreen} options={{ title: 'About the Meal' }} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FavouritesProvider>
     </>
   );
 }
